@@ -1,24 +1,10 @@
-# import requests
+#!/usr/bin/env python3
 import math
 from itertools import product
 from random import shuffle
 from typing import Tuple
 
-BASE_URL = 'https://adventofcode.com/2020/day/{}/input'
-
-
-def get_input(day: int):
-    # response = requests.get(BASE_URL.format(day))
-    with open(f'inputs/day_{day}') as f:
-        return f.read().splitlines()
-
-
-def solve_day_1():
-    numbers = list(map(int, get_input(1)))
-    solution_a = get_target_addends(numbers, 2020, 2)
-    print(f'Solution 1a: {math.prod(solution_a)}')
-    solution_b = get_target_addends(numbers, 2020, 3)
-    print(f'Solution 1b: {math.prod(solution_b)}')
+from solutions import get_input_data
 
 
 def get_target_addends(numbers, target_sum, num_addends=2) -> Tuple[int]:
@@ -45,3 +31,11 @@ def get_target_addends(numbers, target_sum, num_addends=2) -> Tuple[int]:
 
     print('No solution found')
     return [None] * num_addends
+
+
+if __name__ == '__main__':
+    numbers = list(map(int, get_input_data(1)))
+    solution_a = get_target_addends(numbers, 2020, 2)
+    print(f'Solution 1a: {math.prod(solution_a)}')
+    solution_b = get_target_addends(numbers, 2020, 3)
+    print(f'Solution 1b: {math.prod(solution_b)}')
