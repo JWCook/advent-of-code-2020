@@ -5,7 +5,6 @@ from typing import List, Tuple
 
 from solutions import get_input_data
 
-
 LINE_PATTERN = re.compile(r'([0-9]+)-([0-9]+)+\s*(\w):\s*(\S+)')
 InputLine = Tuple[int, int, str, str]
 logger = getLogger(__file__)
@@ -16,10 +15,14 @@ def main():
     input_lines = [parse_line(line) for line in input_data]
 
     valid_passwords_a = [line[3] for line in input_lines if line and is_valid_r1(*line)]
-    logger.info(f'Solution 2a: {len(valid_passwords_a)} out of {len(input_data)} passwords are valid')
+    logger.info(
+        f'Solution 2a: {len(valid_passwords_a)} out of {len(input_data)} passwords are valid'
+    )
 
     valid_passwords_b = [line[3] for line in input_lines if line and is_valid_r2(*line)]
-    logger.info(f'Solution 2b: {len(valid_passwords_b)} out of {len(input_data)} passwords are valid')
+    logger.info(
+        f'Solution 2b: {len(valid_passwords_b)} out of {len(input_data)} passwords are valid'
+    )
 
 
 def parse_line(line: str) -> InputLine:
@@ -43,7 +46,7 @@ def is_valid_r1(char_min: int, char_max: int, required_char: str, password: str)
     is_valid = char_min <= char_count <= char_max
     if not is_valid:
         logger.debug(
-            f'Invalid: "{password}" contains "{required_char}" {char_count} times; '
+            f"Invalid: '{password}' contains '{required_char}' {char_count} times; "
             f'requires {char_min}-{char_max}'
         )
     return is_valid
@@ -65,8 +68,8 @@ def is_valid_r2(pos_1: int, pos_2: int, required_char: str, password: str) -> bo
 
     if not is_valid:
         logger.debug(
-            f'Invalid: "{password}" contains {password[pos_1]} and {password[pos_2]} '
-            f'at indices {pos_1}, {pos_2}; requires "{required_char}" exactly once'
+            f"Invalid: '{password}' contains {password[pos_1]} and {password[pos_2]} "
+            f"at indices {pos_1}, {pos_2}; requires '{required_char}' exactly once"
         )
     return is_valid
 

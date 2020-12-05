@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import math
 from itertools import product
 from logging import getLogger
+from math import prod as multiply
 from random import shuffle
 from typing import Tuple
 
@@ -13,9 +13,9 @@ logger = getLogger(__file__)
 def main():
     numbers = list(map(int, get_input_data(1)))
     solution_a = get_target_addends(numbers, 2020, 2)
-    logger.info(f'Solution 1a: {math.prod(solution_a)}')
+    logger.info(f'Solution 1a: {multiply(solution_a)}')
     solution_b = get_target_addends(numbers, 2020, 3)
-    logger.info(f'Solution 1b: {math.prod(solution_b)}')
+    logger.info(f'Solution 1b: {multiply(solution_b)}')
 
 
 def get_target_addends(numbers, target_sum, num_addends=2) -> Tuple[int]:
@@ -32,7 +32,9 @@ def get_target_addends(numbers, target_sum, num_addends=2) -> Tuple[int]:
         shuffle(number_set)
         number_sets.append(number_set)
 
-    logger.info(f'Searching {len(numbers)} numbers for {num_addends} numbers with a sum of {target_sum}')
+    logger.info(
+        f'Searching {len(numbers)} numbers for {num_addends} numbers with a sum of {target_sum}'
+    )
     n_checks = 0
     for combination in product(*number_sets):
         n_checks += 1
